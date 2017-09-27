@@ -192,6 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Content\Classes\Photo.cs" />
     <Compile Include="Content\Classes\Voter.cs" />
+    <Compile Include="Content\SQLDataLayer.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Global.asax.cs">
