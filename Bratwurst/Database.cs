@@ -6,7 +6,6 @@ using MySql.Data.MySqlClient;
 
 namespace Bratwurst
 {
-
     public class Database
     {
         private MySqlConnection connection;

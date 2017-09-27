@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Bratwurst.Classes
+namespace Bratwurst.Models
 {
     public class Photo
     {
-        private int ID { get; }
-        private string caption { get; set; }
-        private string imageUrl { get; }
-        private string text { get; }
-        private string tags { get; }
-        private string credit { get; }
-        private List<Voter> voters { get; }
-        private int amountOfVoters { get; }
+        public int ID { get; }
+        public string caption { get; set; }
+        public string imageUrl { get; }
+        public string text { get; }
+        public string tags { get; }
+        public string credit { get; }
+        public List<Voter> voters { get; }
+        public int amountOfVoters { get; }
 
         public Photo()
         {

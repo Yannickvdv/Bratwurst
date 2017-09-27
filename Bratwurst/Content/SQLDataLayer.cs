@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using MySql.Data;
 using MySql.Data.MySqlClient;
-using Bratwurst.Classes;
+using Bratwurst.Models;
 
 namespace Bratwurst.Content
 {
@@ -23,6 +23,7 @@ namespace Bratwurst.Content
             List<Photo> photos = new List<Photo>();
             using (connection)
             {
+                connection.Open();
                 string queryString = "SELECT *, (SELECT COUNT(*) FROM vote vo2, photo ph2 WHERE vo2.photoid = ph2.id AND ph1.id = ph2.id) AS amount FROM photo ph1, vote vo1 WHERE ph1.id = vo1.photoid";
                 MySqlCommand cmd = new MySqlCommand(queryString, connection);
                 MySqlDataReader rdr = cmd.ExecuteReader();
