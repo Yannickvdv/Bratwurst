@@ -12,7 +12,7 @@ namespace Bratwurst
 
         public Database()
         {
-            string connString = "Server=https://klar1573.iba-abakomp.dk:8080/phpmyadmin ;Database=c1db1;Uid=c1dbu1;Pwd=GWuQMoHB5b;";
+            string connString = "Server=sql11.freemysqlhosting.net;Port=3306;Database=sql11196548;Uid=sql11196548;Pwd=mdCRa8s4tj;";
             connection = new MySqlConnection(connString);
         }
 

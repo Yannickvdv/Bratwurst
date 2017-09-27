@@ -39,13 +39,13 @@ namespace Bratwurst.Content
                     int amountOfVoters = rdr.GetInt32("amount");
                     photos.Add(new Photo(photoid, caption, image, story, tags, credit, amountOfVoters));
                 }
-
             }
-                return photos;
+            return photos;
         }
 
         public Voter getAccount(string email, string password)
         {
+            Voter voter = null;
             using (connection)
             {
                 string queryString = "SELECT email, firstname FROM voter WHERE email = @email AND password = @password";
@@ -57,13 +57,16 @@ namespace Bratwurst.Content
                 cmd.Parameters.Add("@password", MySqlDbType.VarChar);
                 cmd.Parameters[@password].Value = password;
 
+                
                 while (rdr.Read())
                 {
-       
+                    string emaildatabase = rdr.GetString("email");
+                    string firstname = rdr.GetString("firstname");
+                    voter = new Voter(emaildatabase, firstname);
                 }
-
             }
-            return null;
+            return voter;
         }
+
     }
 }
