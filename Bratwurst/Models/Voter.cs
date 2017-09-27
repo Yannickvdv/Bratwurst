@@ -8,7 +8,6 @@ namespace Bratwurst.Models
     public class Voter
     {
         private string email { get; }
-        private string password { get; }
         private string firstName { get; }
 
         public Voter()
@@ -16,10 +15,9 @@ namespace Bratwurst.Models
 
         }
 
-        public Voter(string Email, string Password, string Firstname)
+        public Voter(string Email, string Firstname)
         {
             this.email = Email;
-            this.password = Password;
             this.firstName = Firstname;
         }
     }
