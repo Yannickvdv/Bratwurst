@@ -15,5 +15,12 @@ namespace Bratwurst.Classes
         {
 
         }
+
+        public Voter(string Email, string Password, string Firstname)
+        {
+            this.email = Email;
+            this.password = Password;
+            this.firstName = Firstname;
+        }
     }
 }
