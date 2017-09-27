@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bratwurst.Classes;
+using Bratwurst.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,7 @@ namespace Bratwurst.Controllers
 {
     public class HomeController : Controller
     {
+
         // GET: Home
         public ActionResult Index()
         {

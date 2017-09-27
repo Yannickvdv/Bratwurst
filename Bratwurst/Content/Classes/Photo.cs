@@ -9,7 +9,7 @@ namespace Bratwurst.Classes
     public class Photo
     {
         private int ID { get; }
-        private string caption { get; }
+        private string caption { get; set; }
         private string imageUrl { get; }
         private string text { get; }
         private string tags { get; }
