@@ -18,7 +18,7 @@ namespace Bratwurst.Content
             this.connection = db.getConnection();
         }
 
-        private List<Photo> getPictures()
+        public List<Photo> getPictures()
         {
             List<Photo> photos = new List<Photo>();
             using (connection)
@@ -41,6 +41,28 @@ namespace Bratwurst.Content
 
             }
                 return photos;
+        }
+
+        public Voter getAccount(string email, string password)
+        {
+            using (connection)
+            {
+                string queryString = "SELECT email, firstname FROM voter WHERE email = @email AND password = @password";
+                MySqlCommand cmd = new MySqlCommand(queryString, connection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                cmd.Parameters.Add("@email", MySqlDbType.VarChar);
+                cmd.Parameters[@email].Value = email;
+                cmd.Parameters.Add("@password", MySqlDbType.VarChar);
+                cmd.Parameters[@password].Value = password;
+
+                while (rdr.Read())
+                {
+       
+                }
+
+            }
+            return null;
         }
     }
 }
