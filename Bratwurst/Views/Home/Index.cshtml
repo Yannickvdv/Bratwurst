@@ -26,7 +26,8 @@
             <article class="item thumb" data-width="282">
                 <h2>@item.caption</h2>
                 <a href="@item.imageUrl" class="image"><img src="@item.imageUrl" alt="@item.tags"></a>
-                <a href="Like">👍🏻</a><a href="Like">👎🏻</a>
+                <a href="Like">👍🏻</a>
+                @Html.ActionLink("👍🏻", "likePicture", "Home", item.ID, "admin@test.nl")
             </article>
         }
     </div>

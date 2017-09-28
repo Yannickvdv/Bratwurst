@@ -35,8 +35,15 @@ namespace Bratwurst.Controllers
             return View(model);
         }
 
-        public ActionResult Login()
+        public ActionResult Login(string email, string password)
         {
+            sql.getAccount(email, password);
+            return View();
+        }
+
+        public ActionResult likePicture(int photoID, string userEmail)
+        {
+            sql.likePicture(photoID, userEmail);
             return View();
         }
     }

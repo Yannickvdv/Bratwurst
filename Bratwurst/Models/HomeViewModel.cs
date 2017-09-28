@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Bratwurst.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
+using System.Web.Mvc;
 
 namespace Bratwurst.Models
 {
@@ -38,7 +39,7 @@ namespace Bratwurst.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 }
