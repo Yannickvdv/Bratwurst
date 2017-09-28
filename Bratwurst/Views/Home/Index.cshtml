@@ -25,7 +25,7 @@
             foreach (var item in Model)
             {
                 <article class="item thumb" data-width="282">
-                    <h2>@Html.ActionLink("👍🏻", "likePicture", "Home", new { photoID = item.ID, userEmail = "admin@test.nl" }, null) @item.amountOfVoters @item.caption  </h2>
+                    <h2><b>@Html.ActionLink("👍🏻", "likePicture", "Home", new { photoID = item.ID, userEmail = Session["loggeduser"]}, null) @item.amountOfVoters </b> -  @item.caption  </h2>
                     <a href="@item.imageUrl" class="image"><img src="@item.imageUrl" alt="@item.tags"></a>
                 </article>
             }

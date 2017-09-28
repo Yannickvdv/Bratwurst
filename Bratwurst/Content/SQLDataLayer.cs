@@ -21,23 +21,29 @@ namespace Bratwurst.Content
         public List<Photo> getPictures()
         {
             List<Photo> photos = new List<Photo>();
-           
-            connection.Open();
-            string queryString = "SELECT *, COUNT(vo.photoid) AS amount FROM photo ph LEFT JOIN vote vo ON vo.photoid = ph.id GROUP BY ph.id";
-
-            MySqlCommand cmd = new MySqlCommand(queryString, connection);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-
-            while (rdr.Read())
+            try
             {
-                int photoid = rdr.GetInt32("id");
-                string caption = rdr.GetString("caption");
-                string image = rdr.GetString("imagedata");
-                string story = rdr.GetString("story");
-                string tags = rdr.GetString("tags");
-                string credit = rdr.GetString("credit");
-                int amountOfVoters = rdr.GetInt32("amount");
-                photos.Add(new Photo(photoid, caption, image, story, tags, credit, amountOfVoters));
+                connection.Open();
+                string queryString = "SELECT *, COUNT(vo.photoid) AS amount FROM photo ph LEFT JOIN vote vo ON vo.photoid = ph.id GROUP BY ph.id";
+
+                MySqlCommand cmd = new MySqlCommand(queryString, connection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    int photoid = rdr.GetInt32("id");
+                    string caption = rdr.GetString("caption");
+                    string image = rdr.GetString("imagedata");
+                    string story = rdr.GetString("story");
+                    string tags = rdr.GetString("tags");
+                    string credit = rdr.GetString("credit");
+                    int amountOfVoters = rdr.GetInt32("amount");
+                    photos.Add(new Photo(photoid, caption, image, story, tags, credit, amountOfVoters));
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             connection.Close();
             
@@ -46,23 +52,29 @@ namespace Bratwurst.Content
 
         public Voter getAccount(string email, string password)
         {
-            Voter voter = null;  
-            connection.Open();
-
-            string queryString = "SELECT email, firstname FROM voter WHERE email = @email AND password = @password";
-            MySqlCommand cmd = new MySqlCommand(queryString, connection);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-
-            cmd.Parameters.AddWithValue("@email", email);
-            cmd.Parameters.AddWithValue("@password", password);
-
-            while (rdr.Read())
+            Voter voter = null;
+            try
             {
-                string emaildatabase = rdr.GetString("email");
-                string firstname = rdr.GetString("firstname");
-                voter = new Voter(emaildatabase, firstname);
-            }
+                connection.Open();
 
+                string queryString = "SELECT email, firstname FROM voter WHERE email = @email AND password = @password";
+                MySqlCommand cmd = new MySqlCommand(queryString, connection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@password", password);
+
+                while (rdr.Read())
+                {
+                    string emaildatabase = rdr.GetString("email");
+                    string firstname = rdr.GetString("firstname");
+                    voter = new Voter(emaildatabase, firstname);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             connection.Close();
             return voter;
         }
