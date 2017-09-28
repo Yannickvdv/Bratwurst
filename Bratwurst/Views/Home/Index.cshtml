@@ -17,11 +17,11 @@
                 <h1>Bratwurst Page</h1>
                     @if(Session["loggedname"] != null)
                     {
-                        <p>Welcome @Session["loggedname"] | @Html.ActionLink("Logout", "Logout", "Home")</p>
+                        <p>Welcome @Session["loggedname"] <br /> @Html.ActionLink("Logout", "Logout", "Home") | @Html.ActionLink("Upload", "Upload", "Home")</p>
                     }
                     else
                     {
-                        <p>The #1 site for bratwurst. | @Html.ActionLink("Login", "Login", "Home")  </p>
+                        <p>The #1 site for bratwurst. <br /> @Html.ActionLink("Login", "Login", "Home") | @Html.ActionLink("Register", "Register", "Home") | @Html.ActionLink("Upload", "Upload", "Home")</p>
                     }
             </div>
        </div>

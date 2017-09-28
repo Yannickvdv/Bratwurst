@@ -44,5 +44,13 @@ namespace Bratwurst.Models
             this.amountOfVoters = AmountOfVoters;
         }
 
+        public Photo(string Caption, string ImageUrl, string Text, string Tags, string Credit)
+        {
+            this.caption = Caption;
+            this.imageUrl = ImageUrl;
+            this.text = Text;
+            this.tags = Tags;
+            this.credit = Credit;
+        }
     }
 }

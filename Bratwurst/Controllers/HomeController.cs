@@ -87,6 +87,25 @@ namespace Bratwurst.Controllers
             return View();
         }
 
+        public ActionResult Upload()
+        {
+            ViewBag.WrongInput = false;
+            if (Request.HttpMethod == "POST")
+            {
+                if (Request.Params["caption"] != "" && Request.Params["url"] != "" && Request.Params["story"] != "")
+                {
+                    Photo p = new Photo(Request.Params["caption"], Request.Params["url"], Request.Params["story"], Request.Params["tags"], Request.Params["credit"]);
+                    sql.uploadImage(p);
+                    return Redirect("Index");
+                }
+                else
+                {
+                    ViewBag.WrongInput = true;
+                }
+            }
+            return View();
+        }
+
         public ActionResult likePicture(int photoID, string userEmail)
         {
             sql.likePicture(photoID, userEmail);

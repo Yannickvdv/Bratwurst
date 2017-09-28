@@ -528,6 +528,10 @@ ul.contact {
             line-height: 1.5em;
             margin: 0.75em 0 0 0;
         }
+        
+        #header a:hover, a:active, a:visited:active, a:visited:hover, a:link {
+            color: #f6758b;
+        }
 
     /* Main */
 

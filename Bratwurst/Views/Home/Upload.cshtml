@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+}
+
+<div id="main">
+    <!-- Header Item -->
+    <div id="login">
+        <h1>Upload</h1>
+        <form method="post">
+            <fieldset>
+                @if(ViewBag.WrongInput == true)
+                {
+                    <font color="red">You've enterred invalid information.</font>
+                }
+                <div>
+                    <label for="caption">Caption:</label>
+                    <input type="text" name="caption" value="" />
+                </div>
+                <div>
+                    <label for="url">Image Link:</label>
+                    <input type="text" name="url" value="" />
+                </div>
+                <div>
+                    <label for="story">Story:</label>
+                    <input type="text" name="story" value="" />
+                </div>
+                <div>
+                    <label for="tags">Tags:</label>
+                    <input type="text" name="tags" value="" />
+                </div>
+                <div>
+                    <label for="credit">Credits:</label>
+                    <input type="text" name="credit" value="" />
+                </div>
+                <div>
+                    <input type="submit" value="Upload" class="submit" />
+                    <center>@Html.ActionLink("Homepage", "Index", "Home")</center>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
