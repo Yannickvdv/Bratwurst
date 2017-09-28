@@ -101,11 +101,11 @@ namespace Bratwurst.Content
             try
             {
                 connection.Open();
-                string queryString = "INSERT INTO vote (email, password) VALUES (@email, @password)";
+                string queryString = "INSERT INTO vote (photoid, voter) VALUES (@photoid, @voter)";
 
                 MySqlCommand cmd = new MySqlCommand(queryString, connection);
-                cmd.Parameters["@email"].Value = photoID;
-                cmd.Parameters["@password"].Value = userEmail;
+                cmd.Parameters.AddWithValue("@photoid", photoID);
+                cmd.Parameters.AddWithValue("@voter", userEmail);
 
                 cmd.ExecuteNonQuery();
                 connection.Close();
