@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+<div id="main">
+    <!-- Header Item -->
+    <div id="register">
+        <h1>Register</h1>
+        <form method="post">
+            <fieldset>
+                @if(ViewBag.WrongInput == true)
+                {
+                    <font color="red">You've enterred invalid information.</font>
+                }
+                <div>
+                    <label for="firstname">First name:</label>
+                    <input type="text" name="first name" value="" />
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" value="" />
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" value="" />
+                </div>
+                <div>
+                    <label for="confPassword">Confirm password:</label>
+                    <input type="password" name="confPassword" value="" />
+                </div>
+                <div>
+                    <br />
+                    <input type="submit" value="Register" class="submit" />
+                    <center>@Html.ActionLink("Homepage", "Index", "Home")</center>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

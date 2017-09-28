@@ -55,6 +55,23 @@ namespace Bratwurst.Controllers
             return View();
         }
 
+        public ActionResult Register()
+        {
+            ViewBag.WrongInput = false;
+            if (Request.HttpMethod == "POST")
+            {
+                if (Request.Params["email"] != "" && Request.Params["password"] != "" && Request.Params["password"] == Request.Params["confPassword"])
+                {
+                    return View("Index");
+                }
+                else
+                {
+                    ViewBag.WrongInput = true;
+                }
+            }
+            return View();
+        }
+
 
         public void loginPost(string email, string password)
         {
