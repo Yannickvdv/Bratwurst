@@ -207,6 +207,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Data\" />
+    <Folder Include="Content\js\" />
     <Folder Include="images\" />
   </ItemGroup>
   <PropertyGroup>

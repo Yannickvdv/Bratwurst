@@ -37,7 +37,7 @@ namespace Bratwurst.Controllers
 
         public ActionResult Login()
         {
-
+            return View();
         }
     }
 }

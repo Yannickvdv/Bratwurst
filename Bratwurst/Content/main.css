@@ -141,10 +141,6 @@ ul.contact {
     background: #1a1f2c;
     background: rgba(255, 255, 255, 0.25);
     cursor: default;
-    box-shadow: rgb(255, 255, 255) 0px 0px 0px 5px; 
-    border: 5px solid rgb(255, 255, 255); 
-    position: relative; 
-    height: 230px;
 }
 
     .item.thumb h2 {
@@ -163,7 +159,6 @@ ul.contact {
     .item.thumb img {
         display: block;
         z-index: 1;
-        height: 230px;
     }
 
 /* Icons */
@@ -267,24 +262,13 @@ ul.contact {
     #main {
         width: 100%;
         position: absolute;
-        overflow: hidden;
-        height: 240px;
-        top: 50%;
-        margin-top: -170px;
     }
 
     /* Reel */
 
     #reel {
         position: relative;
-        opacity: 1;
-        overflow-y: hidden; 
-        margin: 0px auto; 
-        border: 5px solid rgb(255, 255, 255); 
-        box-shadow: rgb(255, 255, 255) 0px 0px 0px 5px; 
-        height: 240px; 
-        width: 6227px; 
-        transition: opacity 0.75s ease-in-out;
+        opacity: 0;
     }
 
         #reel .item {
@@ -300,11 +284,6 @@ ul.contact {
         padding: 2em 3em;
         xmin-height: 212px;
         vertical-align: middle;
-        box-shadow: rgb(255, 255, 255) 0px 0px 0px 5px; 
-        border: 5px solid rgb(255, 255, 255); 
-        position: relative; 
-        width: 7.06714%; 
-        height: 230px;
     }
 
         #header:before {
