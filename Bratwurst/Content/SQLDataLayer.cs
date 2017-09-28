@@ -41,7 +41,6 @@ namespace Bratwurst.Content
             }
             connection.Close();
             
-            
             return photos;
         }
 
@@ -54,12 +53,9 @@ namespace Bratwurst.Content
             MySqlCommand cmd = new MySqlCommand(queryString, connection);
             MySqlDataReader rdr = cmd.ExecuteReader();
 
-            cmd.Parameters.Add("@email", MySqlDbType.VarChar);
-            cmd.Parameters[@email].Value = email;
-            cmd.Parameters.Add("@password", MySqlDbType.VarChar);
-            cmd.Parameters[@password].Value = password;
+            cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@password", password);
 
-                
             while (rdr.Read())
             {
                 string emaildatabase = rdr.GetString("email");
@@ -79,12 +75,12 @@ namespace Bratwurst.Content
                 string queryString = "INSERT INTO photo (id, caption, imagedata, story, tags, credit) VALUES (@id, @caption, @imagedata, @story, @tags, @credit)";
 
                 MySqlCommand cmd = new MySqlCommand(queryString, connection);
-                cmd.Parameters["@id"].Value = photo.ID;
-                cmd.Parameters["@caption"].Value = photo.caption;
-                cmd.Parameters["@imagedata"].Value = photo.imageUrl;
-                cmd.Parameters["@story"].Value = photo.text;
-                cmd.Parameters["@tags"].Value = photo.tags;
-                cmd.Parameters["@credit"].Value = photo.credit;
+                cmd.Parameters.AddWithValue("@id", photo.ID);
+                cmd.Parameters.AddWithValue("@caption", photo.caption);
+                cmd.Parameters.AddWithValue("@imagedata", photo.imageUrl);
+                cmd.Parameters.AddWithValue("@story", photo.text);
+                cmd.Parameters.AddWithValue("@tags", photo.tags);
+                cmd.Parameters.AddWithValue("@credit", photo.credit);
 
                 cmd.ExecuteNonQuery();
                 connection.Close();
@@ -101,11 +97,11 @@ namespace Bratwurst.Content
             try
             {
                 connection.Open();
-                string queryString = "INSERT INTO vote (email, password) VALUES (@email, @password)";
+                string queryString = "INSERT INTO vote (photoid, voter) VALUES (@photoid, @voter)";
 
                 MySqlCommand cmd = new MySqlCommand(queryString, connection);
-                cmd.Parameters["@email"].Value = photoID;
-                cmd.Parameters["@password"].Value = userEmail;
+                cmd.Parameters.AddWithValue("@photoid", photoID);
+                cmd.Parameters.AddWithValue("@voter", userEmail);
 
                 cmd.ExecuteNonQuery();
                 connection.Close();

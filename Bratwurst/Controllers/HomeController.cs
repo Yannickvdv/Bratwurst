@@ -64,7 +64,7 @@ namespace Bratwurst.Controllers
         public ActionResult likePicture(int photoID, string userEmail)
         {
             sql.likePicture(photoID, userEmail);
-            return View();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

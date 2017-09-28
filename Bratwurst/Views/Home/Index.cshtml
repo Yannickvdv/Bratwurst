@@ -20,16 +20,17 @@
                 </p>
             </div>
        </div>
-
-        @foreach (var item in Model)
+        @if (Model != null)
         {
-            <article class="item thumb" data-width="282">
-                <h2>@item.caption</h2>
-                <a href="@item.imageUrl" class="image"><img src="@item.imageUrl" alt="@item.tags"></a>
-                <a href="Like">👍🏻</a>
-                @Html.ActionLink("👍🏻", "likePicture", "Home", item.ID, "admin@test.nl")
-            </article>
+            foreach (var item in Model)
+            {
+                <article class="item thumb" data-width="282">
+                    <h2>@Html.ActionLink("👍🏻", "likePicture", "Home", new { photoID = item.ID, userEmail = "admin@test.nl" }, null) @item.amountOfVoters @item.caption  </h2>
+                    <a href="@item.imageUrl" class="image"><img src="@item.imageUrl" alt="@item.tags"></a>
+                </article>
+            }
         }
+        
     </div>
 </div>
 
