@@ -7,8 +7,8 @@ namespace Bratwurst.Models
 {
     public class Voter
     {
-        private string email { get; }
-        private string firstName { get; }
+        public string email { get; }
+        public string firstName { get; }
 
         public Voter()
         {

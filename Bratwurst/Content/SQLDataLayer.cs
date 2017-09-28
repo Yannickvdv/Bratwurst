@@ -59,10 +59,9 @@ namespace Bratwurst.Content
 
                 string queryString = "SELECT email, firstname FROM voter WHERE email = @email AND password = @password";
                 MySqlCommand cmd = new MySqlCommand(queryString, connection);
-                MySqlDataReader rdr = cmd.ExecuteReader();
-
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.Parameters.AddWithValue("@password", password);
+                MySqlDataReader rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
@@ -114,6 +113,7 @@ namespace Bratwurst.Content
                 MySqlCommand cmd = new MySqlCommand(queryString, connection);
                 cmd.Parameters.AddWithValue("@photoid", photoID);
                 cmd.Parameters.AddWithValue("@voter", userEmail);
+
 
                 cmd.ExecuteNonQuery();
                 connection.Close();
