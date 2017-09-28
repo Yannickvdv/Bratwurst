@@ -42,9 +42,17 @@ namespace Bratwurst.Controllers
             {
                 if (Request.Params["email"] != "" && Request.Params["password"] != "")
                 {
-
-                    Session["email"] = Request.Params.Get("email");
-                    return View("Index");
+                    Voter voter = sql.getAccount(Request.Params["email"], Request.Params["password"]);
+                    if(voter != null)
+                    {
+                        Session["loggedemail"] = voter.email;
+                        Session["loggedname"] = voter.firstName;
+                        return Redirect("Index");
+                    }
+                    else
+                    {
+                        ViewBag.WrongInput = true;
+                    }
                 }
                 else
                 {
@@ -55,10 +63,10 @@ namespace Bratwurst.Controllers
             return View();
         }
 
-
-        public void loginPost(string email, string password)
+        public ActionResult Logout()
         {
-            sql.getAccount(email, password);
+            Session.Clear();
+            return Redirect("Index");
         }
 
         public ActionResult likePicture(int photoID, string userEmail)

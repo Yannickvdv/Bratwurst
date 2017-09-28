@@ -15,9 +15,14 @@
         <div id="header" class="item" data-width="400">
             <div class="inner">
                 <h1>Bratwurst Page</h1>
-                <p>
-                    The #1 site for bratwurst.
-                </p>
+                    @if(Session["loggedname"] != null)
+                    {
+                        <p>Welcome @Session["loggedname"] | @Html.ActionLink("Logout", "Logout", "Home")</p>
+                    }
+                    else
+                    {
+                        <p>The #1 site for bratwurst. | @Html.ActionLink("Login", "Login", "Home")  </p>
+                    }
             </div>
        </div>
         @if (Model != null)
@@ -25,12 +30,11 @@
             foreach (var item in Model)
             {
                 <article class="item thumb" data-width="282">
-                    <h2><b>@Html.ActionLink("👍🏻", "likePicture", "Home", new { photoID = item.ID, userEmail = Session["loggeduser"]}, null) @item.amountOfVoters </b> -  @item.caption  </h2>
+                    <h2><b>@Html.ActionLink("👍🏻", "likePicture", "Home", new { photoID = item.ID, userEmail = Session["loggedemail"]}, null) @item.amountOfVoters </b> -  @item.caption  </h2>
                     <a href="@item.imageUrl" class="image"><img src="@item.imageUrl" alt="@item.tags"></a>
                 </article>
             }
         }
-        
     </div>
 </div>
 
