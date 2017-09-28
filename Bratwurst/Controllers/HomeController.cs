@@ -69,6 +69,24 @@ namespace Bratwurst.Controllers
             return Redirect("Index");
         }
 
+        public ActionResult Register()
+        {
+            ViewBag.WrongInput = false;
+            if (Request.HttpMethod == "POST")
+            {
+                if (Request.Params["email"] != "" && Request.Params["password"] != "" && Request.Params["firstname"] != "" && Request.Params["password"] == Request.Params["confPassword"])
+                {
+                    sql.uploadAccount(Request.Params["email"], Request.Params["password"], Request.Params["firstname"]);
+                    return Redirect("Index");
+                }
+                else
+                {
+                    ViewBag.WrongInput = true;
+                }
+            }
+            return View();
+        }
+
         public ActionResult likePicture(int photoID, string userEmail)
         {
             sql.likePicture(photoID, userEmail);

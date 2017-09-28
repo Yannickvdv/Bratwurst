@@ -103,6 +103,28 @@ namespace Bratwurst.Content
             }
         }
 
+        public bool uploadAccount(string email, string password, string firstname)
+        {
+            try
+            {
+                connection.Open();
+                string queryString = "INSERT INTO voter (email, password, firstname) VALUES (@email, @password, @firstname);";
+
+                MySqlCommand cmd = new MySqlCommand(queryString, connection);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@firstname", firstname);
+
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public bool likePicture(int photoID, string userEmail)
         {
             try
