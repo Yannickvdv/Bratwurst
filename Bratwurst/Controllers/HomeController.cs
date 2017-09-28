@@ -35,10 +35,30 @@ namespace Bratwurst.Controllers
             return View(model);
         }
 
-        public ActionResult Login(string email, string password)
+        public ActionResult Login()
+        {
+            ViewBag.WrongInput = false;
+            if (Request.HttpMethod == "POST")
+            {
+                if (Request.Params["email"] != "" && Request.Params["password"] != "")
+                {
+
+                    Session["email"] = Request.Params.Get("email");
+                    return View("Index");
+                }
+                else
+                {
+                    ViewBag.WrongInput = true;
+                }
+            }
+
+            return View();
+        }
+
+
+        public void loginPost(string email, string password)
         {
             sql.getAccount(email, password);
-            return View();
         }
 
         public ActionResult likePicture(int photoID, string userEmail)

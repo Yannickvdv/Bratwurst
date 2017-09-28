@@ -9,9 +9,13 @@
         <h1>Login</h1>
         <form method="post">
             <fieldset>
+                @if(ViewBag.WrongInput == true)
+                {
+                    <font color="red">You've enterred invalid information.</font>
+                }
                 <div>
-                    <label for="username">Username:</label>
-                    <input type="text" name="username" value="" />
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" value="" />
                 </div>
                 <div>
                     <label for="password">Password:</label>
@@ -20,6 +24,7 @@
                 <div>
                     <br />
                     <input type="submit" value="Login" class="submit" />
+                    <center>@Html.ActionLink("Homepage", "Index", "Home")</center>
                 </div>
             </fieldset>
         </form>
