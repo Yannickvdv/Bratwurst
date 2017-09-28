@@ -95,5 +95,26 @@ namespace Bratwurst.Content
                 return false;
             }
         }
+
+        public bool likePicture(int photoID, string userEmail)
+        {
+            try
+            {
+                connection.Open();
+                string queryString = "INSERT INTO vote (email, password) VALUES (@email, @password)";
+
+                MySqlCommand cmd = new MySqlCommand(queryString, connection);
+                cmd.Parameters["@email"].Value = photoID;
+                cmd.Parameters["@password"].Value = userEmail;
+
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
