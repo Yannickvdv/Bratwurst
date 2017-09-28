@@ -21,52 +21,79 @@ namespace Bratwurst.Content
         public List<Photo> getPictures()
         {
             List<Photo> photos = new List<Photo>();
-            using (connection)
-            {
-                connection.Open();
-                string queryString = "SELECT *, (SELECT COUNT(*) FROM vote vo2, photo ph2 WHERE vo2.photoid = ph2.id AND ph1.id = ph2.id) AS amount FROM photo ph1, vote vo1 WHERE ph1.id = vo1.photoid";
-                MySqlCommand cmd = new MySqlCommand(queryString, connection);
-                MySqlDataReader rdr = cmd.ExecuteReader();
+           
+            connection.Open();
+            string queryString = "SELECT *, COUNT(vo.photoid) AS amount FROM photo ph LEFT JOIN vote vo ON vo.photoid = ph.id GROUP BY ph.id";
 
-                while (rdr.Read())
-                {
-                    int photoid = rdr.GetInt32("id");
-                    string caption = rdr.GetString("caption");
-                    string image = rdr.GetString("imagedata");
-                    string story = rdr.GetString("story");
-                    string tags = rdr.GetString("tags");
-                    string credit = rdr.GetString("credit");
-                    int amountOfVoters = rdr.GetInt32("amount");
-                    photos.Add(new Photo(photoid, caption, image, story, tags, credit, amountOfVoters));
-                }
+            MySqlCommand cmd = new MySqlCommand(queryString, connection);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                int photoid = rdr.GetInt32("id");
+                string caption = rdr.GetString("caption");
+                string image = rdr.GetString("imagedata");
+                string story = rdr.GetString("story");
+                string tags = rdr.GetString("tags");
+                string credit = rdr.GetString("credit");
+                int amountOfVoters = rdr.GetInt32("amount");
+                photos.Add(new Photo(photoid, caption, image, story, tags, credit, amountOfVoters));
             }
+            connection.Close();
+            
+            
             return photos;
         }
 
         public Voter getAccount(string email, string password)
         {
-            Voter voter = null;
-            using (connection)
-            {
-                string queryString = "SELECT email, firstname FROM voter WHERE email = @email AND password = @password";
-                MySqlCommand cmd = new MySqlCommand(queryString, connection);
-                MySqlDataReader rdr = cmd.ExecuteReader();
+            Voter voter = null;  
+            connection.Open();
 
-                cmd.Parameters.Add("@email", MySqlDbType.VarChar);
-                cmd.Parameters[@email].Value = email;
-                cmd.Parameters.Add("@password", MySqlDbType.VarChar);
-                cmd.Parameters[@password].Value = password;
+            string queryString = "SELECT email, firstname FROM voter WHERE email = @email AND password = @password";
+            MySqlCommand cmd = new MySqlCommand(queryString, connection);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            cmd.Parameters.Add("@email", MySqlDbType.VarChar);
+            cmd.Parameters[@email].Value = email;
+            cmd.Parameters.Add("@password", MySqlDbType.VarChar);
+            cmd.Parameters[@password].Value = password;
 
                 
-                while (rdr.Read())
-                {
-                    string emaildatabase = rdr.GetString("email");
-                    string firstname = rdr.GetString("firstname");
-                    voter = new Voter(emaildatabase, firstname);
-                }
+            while (rdr.Read())
+            {
+                string emaildatabase = rdr.GetString("email");
+                string firstname = rdr.GetString("firstname");
+                voter = new Voter(emaildatabase, firstname);
             }
+
+            connection.Close();
             return voter;
         }
 
+        public bool uploadImage(Photo photo)
+        {
+            try
+            {
+                connection.Open();
+                string queryString = "INSERT INTO photo (id, caption, imagedata, story, tags, credit) VALUES (@id, @caption, @imagedata, @story, @tags, @credit)";
+
+                MySqlCommand cmd = new MySqlCommand(queryString, connection);
+                cmd.Parameters["@id"].Value = photo.ID;
+                cmd.Parameters["@caption"].Value = photo.caption;
+                cmd.Parameters["@imagedata"].Value = photo.imageUrl;
+                cmd.Parameters["@story"].Value = photo.text;
+                cmd.Parameters["@tags"].Value = photo.tags;
+                cmd.Parameters["@credit"].Value = photo.credit;
+
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
