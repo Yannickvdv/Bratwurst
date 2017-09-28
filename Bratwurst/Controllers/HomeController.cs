@@ -21,5 +21,10 @@ namespace Bratwurst.Controllers
 
             return View(model);
         }
+
+        public ActionResult Fuck()
+        {
+            return View();
+        }
     }
 }
